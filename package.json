@@ -1,0 +1,17 @@
+{
+  "name": "ld-lighthouse-node-server",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "launchdarkly-node-server-sdk": "^6.4.2"
+  }
+}
