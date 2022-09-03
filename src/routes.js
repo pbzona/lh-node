@@ -6,5 +6,6 @@ const router = express.Router();
 router.get('/content', handlers.contentHandler);
 router.get('/module/:id', handlers.moduleHandler);
 router.get('/progress', handlers.progressHandler);
+router.get('/progress/:id', handlers.singleModuleProgressHandler);
 
 module.exports = router;
