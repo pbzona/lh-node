@@ -1,6 +1,6 @@
-const moduleTests = require('./_moduleTests');
+const moduleTransforms = require('./_moduleTransforms');
 
-const evaluateTestForModule = (moduleID, exportedValue) => {
+const transformModuleExports = (moduleID, exportedValue) => {
   moduleID = parseInt(moduleID);
 
   // Return the return value of the corresponding module test
@@ -8,7 +8,7 @@ const evaluateTestForModule = (moduleID, exportedValue) => {
   // object exported by that learning module
   switch (moduleID) {
     case 1:
-      return moduleTests.sdkSetup(exportedValue);
+      return moduleTransforms.sdkSetup(exportedValue);
     case 2:
       break;
     case 3:

@@ -8,7 +8,7 @@ Welcome! This project is meant to provide an extremely modular framework for run
 
 The app is an API server that exposes a couple endpoints:
 
-- GET `/module/:id` returns an object of the form `{ data: WHATEVERYOUWANT }` where the variable is, quite literally, whatever you want. The `id` parameter is the corresponding learning module. A frontend application (or any other client) can request this route during the appropriate workshop stage and get confirmation as to whether the user has successfully completed the task for that section.
+- GET `/module/:id` returns an object that will be used by the frontend to show some sort of visual feedback. The `id` parameter is the corresponding learning module. A frontend application (or any other client) can request this route during the appropriate workshop stage and get confirmation as to whether the user has successfully completed the task for that section.
 
 - **NOT IMPLEMENTED YET** GET `/content` returns an array of JSON objects that include instructional text to be displayed in the browser during the workshop.
 
@@ -30,15 +30,17 @@ In the `index.js` file in the corresponding `module` directory, you may add boil
 
 There is no reason you can't use multiple files here, depending on what you want to illustrate. For example, it might make sense to create a few different modules (as in Node modules) within the learning module to simulate an MVC web app structure, for example. The only thing that's required is that the export you will use comes from `index.js`.
 
-### The module test
+### The module transformation
 
-In `src/_moduleTests.js` you will define a test function. This function takes one argument, the export from its corresponding learning module code. 
+In `src/_moduleTransforms.js` you will define a transformation function. This function takes one argument, the export from its corresponding learning module code. 
 
-The function should perform some kind of assertion to check whether the exported value from the learning module matches its expected value. 
+In its simplest form, a transformation might return a simple boolean value; you can think of it almost like a unit test. For example, the function might perform some kind of assertion to check whether the exported value from the learning module matches its expected value.
 
-The return value is what will be sent back via the API call (it's the `WHATEVERYOUWANT` in the section above). 
+However, it can also provide arbitrary data. In addition to checking if a value is true or false, you can also use the data exported from the module to show visual feedback on the client.
 
-### Mapping the test to its module
+The return value is what will be sent back via the API call. It must be in the form of an object that can be parsed on the client side by `JSON.parse()`.
+
+### Mapping the transformation to its module
 
 In `src/_moduleMap.js` you will associate the test function to its corresponding learning module (or more precisely, to the export from the learning module). To do this, return its value in the appropriate stage of the switch statement.
 
