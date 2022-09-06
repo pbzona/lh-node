@@ -38,7 +38,7 @@ In its simplest form, a transformation might return a simple boolean value; you 
 
 However, it can also provide arbitrary data. In addition to checking if a value is true or false, you can also use the data exported from the module to show visual feedback on the client.
 
-The return value is what will be sent back via the API call. It must be in the form of an object that can be parsed on the client side by `JSON.parse()`.
+The return value is what will be sent back via the API call. It must be in the form of an object that can be parsed in the response body on the client side.
 
 ### Mapping the transformation to its module
 
