@@ -19,7 +19,7 @@ exports.progressHandler = (req, res) => {
     percentComplete: progressTracker.getPercentageComplete(),
     completedCount: progressTracker.getCompletedModuleCount()
   };
-  res.send({ data: response });
+  res.send({ response });
 }
 
 exports.singleModuleProgressHandler = (req,res) => {
@@ -27,7 +27,7 @@ exports.singleModuleProgressHandler = (req,res) => {
   const response = {
     isModuleComplete: progressTracker.isModuleComplete(id)
   };
-  res.send({ data: response });
+  res.send({ response });
 }
 
 exports.listenHandler = () => {
