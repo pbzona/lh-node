@@ -20,4 +20,4 @@ const transformModuleExports = (moduleID, exportedValue) => {
   }
 }
 
-module.exports = { evaluateTestForModule };
+module.exports = { transformModuleExports };

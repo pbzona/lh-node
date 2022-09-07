@@ -9,7 +9,7 @@ exports.contentHandler = (req, res) => {
 exports.moduleHandler = (req, res) => {
   const { id } = req.params;
   const exportedValue = moduleLoader.load(id);
-  const result = moduleMap.evaluateTestForModule(id, exportedValue);
+  const result = moduleMap.transformModuleExports(id, exportedValue);
   res.send({ data: result });
 }
 
