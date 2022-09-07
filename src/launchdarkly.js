@@ -23,7 +23,12 @@ class LaunchDarklySingleton {
 
   // Returns true if `ldclient` is not a falsy value; i.e. it has been set
   hasClientInitialized() {
-    return !!this.ldclient;
+    try {
+      return this.ldclient.initialized();
+    } catch (err) {
+      console.error(err);
+    }
+    return false;
   }
 }
 

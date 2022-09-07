@@ -10,7 +10,7 @@ exports.moduleHandler = (req, res) => {
   const { id } = req.params;
   const exportedValue = moduleLoader.load(id);
   const result = moduleMap.transformModuleExports(id, exportedValue);
-  res.send({ data: result });
+  res.send(result);
 }
 
 exports.progressHandler = (req, res) => {
@@ -30,6 +30,6 @@ exports.singleModuleProgressHandler = (req,res) => {
   res.send({ data: response });
 }
 
-exports.listenHandler = (loaders) => {
+exports.listenHandler = () => {
   console.log('Listening for connections...');
 }
