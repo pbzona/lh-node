@@ -43,7 +43,7 @@ exports.getUserVariations = async (exportedValue) => {
 
     return { users: users.map((user, idx) => {
       return {
-        name: user.name,
+        context: user,
         variation: userVariations[idx]
       }
     }) };
