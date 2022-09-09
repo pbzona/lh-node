@@ -6,10 +6,10 @@ exports.contentHandler = (req, res) => {
   res.send({ message: 'This is content' });
 }
 
-exports.moduleHandler = (req, res) => {
+exports.moduleHandler = async (req, res) => {
   const { id } = req.params;
   const exportedValue = moduleLoader.load(id);
-  const result = moduleMap.transformModuleExports(id, exportedValue);
+  const result = await moduleMap.transformModuleExports(id, exportedValue);
   res.send(result);
 }
 
