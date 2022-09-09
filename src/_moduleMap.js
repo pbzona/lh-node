@@ -12,7 +12,7 @@ const transformModuleExports = (moduleID, exportedValue) => {
     case 2:
       break;
     case 3:
-      break;
+      return moduleTransforms.getUserVariations(exportedValue);
     case 4:
       break;
     default:

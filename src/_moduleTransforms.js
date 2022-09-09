@@ -1,3 +1,5 @@
+const launchDarkly = require('../src/launchdarkly');
+
 // Write transformations against the learning module exports here
 
 // Module01
@@ -26,3 +28,20 @@ exports.sdkSetup = (exportedValue) => {
 }
 
 // Module02
+
+// Module03
+exports.getUserVariations = async (exportedValue) => {
+  const { ldclient } = launchDarkly;
+  const { flag, users } = exportedValue;
+
+  try {
+    let userArray = users.map(user => (
+      ldclient.variation(flag, user)
+    ));
+    return { users: await Promise.all(userArray) };
+  } catch (err) {
+    console.error(err);
+  }
+
+  return { users: null }
+}
