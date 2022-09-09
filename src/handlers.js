@@ -10,7 +10,6 @@ exports.moduleHandler = async (req, res) => {
   const { id } = req.params;
   const exportedValue = moduleLoader.load(id);
   const result = await moduleMap.transformModuleExports(id, exportedValue);
-  console.log(result)
   res.send(result);
 }
 

@@ -38,7 +38,15 @@ exports.getUserVariations = async (exportedValue) => {
     let userArray = users.map(user => (
       ldclient.variation(flag, user)
     ));
-    return { users: await Promise.all(userArray) };
+
+    let userVariations = await Promise.all(userArray);
+
+    return { users: users.map((user, idx) => {
+      return {
+        name: user.name,
+        variation: userVariations[idx]
+      }
+    }) };
   } catch (err) {
     console.error(err);
   }
