@@ -3,6 +3,7 @@
 // or subtract items from this list as needed - copy and paste the line with
 // the module name changed as appropriate
 const fs = require('fs');
+const ExportCache = require('./exportCache');
 
 const modules = [
   require('path').resolve(__dirname, '../module01'),
@@ -15,7 +16,12 @@ const modules = [
 class Loader {
   // Instantiated with an array of module paths
   constructor(workshopModules) {
-    this.modules = workshopModules;
+    if (Loader.instance !== null) {
+      Loader.instance = this;
+      this.modules = workshopModules;
+      this.cache = new ExportCache(this.modules);
+    }
+    return Loader.instance;
   }
 
   // Forces a reload of a module, specified by its number
@@ -23,11 +29,14 @@ class Loader {
   // in an array (for readability elsewhere in the code)
   load(index) {
     let idx = index - 1; // Subctracting 1 so the index argument matches with the module's name
-    fs.readFile(this.modules[idx], () => {
-      // TODO Check for file changes here?
+    try {
       delete require.cache[require.resolve(this.modules[idx])]
-    });
-    return require(this.modules[idx]);
+      this.cache.update(index);
+      return require(this.modules[idx]);
+    } catch (err) {
+      console.error(`ERROR: Unable to load export from module ${index} - falling back to last known good value. There is likely a syntax error in the file ${this.modules[idx]}`);
+    }
+    return this.cache.moduleExports[idx];
   }
 
   // Returns number of modules in this workshop
@@ -36,4 +45,5 @@ class Loader {
   }
 }
 
-module.exports = new Loader(modules);
+let moduleLoader = new Loader(modules);
+module.exports = moduleLoader;
