@@ -10,7 +10,7 @@ const transformModuleExports = (moduleID, exportedValue) => {
     case 1:
       return moduleTransforms.sdkSetup(exportedValue);
     case 2:
-      return moduleTransforms.getFlagValues(exportedValue);
+      return moduleTransforms.getFlagValue(exportedValue);
     case 3:
       return moduleTransforms.getUserVariations(exportedValue);
     case 4:

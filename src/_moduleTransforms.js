@@ -28,6 +28,12 @@ exports.sdkSetup = (exportedValue) => {
 }
 
 // Module02
+exports.getFlagValue = async (exportedValue) => {
+  const flagValue = await exportedValue;
+  return { flagValue };
+}
+
+// Saving this function for future use, only need 1 value for Module 2 for now
 exports.getFlagValues = async (exportedValue) => {
   const { ldclient } = launchDarkly;
   const user = { key: 'abc123' };
