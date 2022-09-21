@@ -28,6 +28,17 @@ exports.sdkSetup = (exportedValue) => {
 }
 
 // Module02
+exports.getFlagValues = async (exportedValue) => {
+  const { ldclient } = launchDarkly;
+  const user = { key: 'abc123' };
+  const allFlags = await ldclient.allFlagsState(user);
+  const flagJSON = allFlags.toJSON();
+  return {
+    allFlags: flagJSON,
+    flagKey: exportedValue,
+    flagValue: flagJSON[exportedValue]
+  };
+}
 
 // Module03
 exports.getUserVariations = async (exportedValue) => {
