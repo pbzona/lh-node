@@ -28,22 +28,9 @@ exports.sdkSetup = (exportedValue) => {
 }
 
 // Module02
-exports.getFlagValue = async (exportedValue) => {
-  const flagValue = await exportedValue;
-  return { flagValue };
-}
-
-// Saving this function for future use, only need 1 value for Module 2 for now
-exports.getFlagValues = async (exportedValue) => {
-  const { ldclient } = launchDarkly;
-  const user = { key: 'abc123' };
-  const allFlags = await ldclient.allFlagsState(user);
-  const flagJSON = allFlags.toJSON();
-  return {
-    allFlags: flagJSON,
-    flagKey: exportedValue,
-    flagValue: flagJSON[exportedValue]
-  };
+exports.configureApp = async (exportedValue) => {
+  const { flagValue, configValid } = await exportedValue;
+  return { flagValue, configValid };
 }
 
 // Module03
