@@ -35,24 +35,18 @@ exports.configureApp = async (exportedValue) => {
 
 // Module03
 exports.getUserVariations = async (exportedValue) => {
-  const { ldclient } = launchDarkly;
-  const { flag, users } = exportedValue;
-
+  const { users } = exportedValue;
+  const userVariations = await Promise.all(exportedValue.userVariations);
+  
   try {
-    let userArray = users.map(user => (
-      ldclient.variation(flag, user)
-    ));
-
-    let userVariations = await Promise.all(userArray);
-
     return { users: users.map((user, idx) => {
       return {
         context: user,
         variation: userVariations[idx]
       }
-    }) };
+    })}
   } catch (err) {
-    console.error(err);
+    console.error(err)
   }
 
   return { users: null }
