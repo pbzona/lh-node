@@ -29,8 +29,8 @@ exports.sdkSetup = (exportedValue) => {
 
 // Module02
 exports.configureApp = async (exportedValue) => {
-  const { flagValue, configValid } = await exportedValue;
-  return { flagValue, configValid };
+  const { flagValue, featureIsWorking } = await exportedValue;
+  return { flagValue, featureIsWorking };
 }
 
 // Module03

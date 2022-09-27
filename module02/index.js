@@ -1,6 +1,7 @@
 // Example of how to import once the singleton's ldclient has been set
 const { ldclient } = require('../src/launchdarkly');
 const { AppConfiguration, LegacyAppConfiguration} = require('../lib/appConfig');
+const dependencies = require('./dependencies');
 
 async function configureApp() {
   const userCtx = { key: 'abc' };
@@ -10,7 +11,7 @@ async function configureApp() {
   // Do not edit above this line
   if (ldclient) {
     // Paste your call to variation here:
-    // useNewConfig = await ldclient.variation('first-flag', userCtx, fallback);
+    useNewConfig = fallback;
   }
 
   // This code loads and validates the configuration file. I hope it works!!!
@@ -22,14 +23,16 @@ async function configureApp() {
   } else {
     config = new LegacyAppConfiguration(options);
   }
-  config.loadFromFile('/etc/myApp/config.json');
+  config.loadFromFile('/varr/opt/myApp/config.json');
+  config.addDependencies(dependencies);
   // ---------------------------
   // Do not edit below this line
   configValid = config.validate();
+  dependenciesSatisfied = config.checkDependencies();
 
   return {
     flagValue: useNewConfig,
-    configValid
+    featureIsWorking: configValid && dependenciesSatisfied
   };
 }
 
