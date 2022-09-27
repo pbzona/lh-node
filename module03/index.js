@@ -13,7 +13,8 @@ const user1 = {
     early_access: false,
     device: 'mobile',
     operating_system: 'android',
-    browser_name: 'firefox'
+    browser_name: 'firefox',
+    app_version: '1.9'
   }
 }
 
@@ -26,7 +27,8 @@ const user2 = {
     early_access: true,
     device: 'mobile',
     operating_system: 'iOS',
-    browser_name: 'safari'
+    browser_name: 'safari',
+    app_version: '2.0'
   }
 }
 
@@ -39,7 +41,8 @@ const user3 = {
     early_access: false,
     device: 'mobile',
     operating_system: 'android',
-    browser_name: 'chrome'
+    browser_name: 'chrome',
+    app_version: '2.1'
   }
 }
 
