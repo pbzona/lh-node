@@ -14,7 +14,7 @@ const transformModuleExports = (moduleID, exportedValue) => {
     case 3:
       return moduleTransforms.getUserVariations(exportedValue);
     case 4:
-      break;
+      return moduleTransforms.configureApp(exportedValue);
     default:
       return `Invalid request - no module with index ${moduleID}`;
   }

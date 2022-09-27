@@ -1,7 +1,7 @@
 // Example of how to import once the singleton's ldclient has been set
 const { ldclient } = require('../src/launchdarkly');
 const { AppConfiguration, LegacyAppConfiguration} = require('../lib/appConfig');
-const dependencies = require('./dependencies');
+const pathToDependencies = require('path').join(__dirname, 'dependencies.js');
 
 async function configureApp() {
   const userCtx = { key: 'abc' };
@@ -24,7 +24,7 @@ async function configureApp() {
     config = new LegacyAppConfiguration(options);
   }
   config.loadFromFile('/varr/opt/myApp/config.json');
-  config.addDependencies(dependencies);
+  config.loadDependencies(pathToDependencies);
   // ---------------------------
   // Do not edit below this line
   configValid = config.validate();
