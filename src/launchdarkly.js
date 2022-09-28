@@ -26,7 +26,7 @@ class LaunchDarklySingleton {
     try {
       return this.ldclient.initialized();
     } catch (err) {
-      console.error(err);
+      // console.error(err);
     }
     return false;
   }
