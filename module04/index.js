@@ -24,8 +24,8 @@ async function configureApp() {
   };
   
   if (ldclient) {
-    // Paste your call to variation here:
-    useNewConfig = fallback;
+    // Paste your call to variation here and assign it to `useNewConfig`:
+    
   }
 
   // This code loads and validates the configuration file. I hope it works!!!
