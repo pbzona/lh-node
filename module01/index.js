@@ -15,7 +15,7 @@ if (!launchDarkly.hasClientInitialized()) {
   // const SDK_KEY = "sdk-xxxxxxx";
 
   // STEP 3: Intialize the SDK client
-  // const ldclient = ld.call_some_method();
+  // const ldclient = ld.init();
 
   // STEP 4: Print a test message to indicate the client has initialized successfully
   // ldclient.on('ready', () => {
