@@ -49,8 +49,8 @@ const user3 = {
 // Step 2:
 // Add your feature flag to the variation call in the helper
 async function targetingHelper(ctx) {
-  // const flagValue = ???
-  return false;
+  const flagValue = false;
+  return flagValue;
 }
 
 // Step 3:

@@ -7,21 +7,21 @@ if (!launchDarkly.hasClientInitialized()) {
 // Do not edit above this line
 // ---------------------------
 
-  // SDK Setup
-  // STEP 1: Import the correct module
-  // const ld = require('');
+// SDK Setup
+// STEP 1: Import the correct module
+const ld = require('');
 
-  // STEP 2: Define your SDK key
-  // const SDK_KEY = "sdk-xxxxxxx";
+// STEP 2: Define your SDK key
+const SDK_KEY = "";
 
-  // STEP 3: Intialize the SDK client
-  // const ldclient = ld.init();
+// STEP 3: Intialize the SDK client
+const ldclient = ld.init(SDK_KEY);
 
-  // STEP 4: Print a test message to indicate the client has initialized successfully
-  // ldclient.on('ready', () => {
-  //   console.log('LAUNCHDARKLY CLIENT INITIALIZED');
-  //   launchDarkly.setInstance(ldclient);
-  // });
+// STEP 4: Print a test message to indicate the client has initialized successfully
+ldclient.on('ready', () => {
+  console.log('LAUNCHDARKLY CLIENT INITIALIZED');
+  launchDarkly.setInstance(ldclient);
+});
   
   // ---------------------------
   // Do not edit below this line

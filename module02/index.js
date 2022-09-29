@@ -10,8 +10,8 @@ async function configureApp() {
   // ---------------------------
   // Do not edit above this line
   if (ldclient) {
-    // Paste your call to variation here and assign it to `useNewConfig`:
-    
+    // Replace the flagKey value with your feature flag key below:
+    useNewConfig = await ldclient.variation'flagKey', userCtx, fallback);
   }
 
   // This code loads and validates the configuration file. I hope it works!!!
