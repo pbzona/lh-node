@@ -1,4 +1,5 @@
 const launchDarkly = require('../src/launchdarkly');
+const moduleLoader = require('../src/_moduleLoader');
 
 // This checks to see if the client has already been initialized
 // If we remove this check, it will initiate a new streaming connection every time
@@ -18,9 +19,12 @@ if (!launchDarkly.hasClientInitialized()) {
 // const ldclient = ld.init(SDK_KEY);
 
 // STEP 4: Print a test message to indicate the client has initialized successfully
+//         and perform some setup operations to allow its use elsewhere
+
 // ldclient.on('ready', () => {
 //   console.log('LAUNCHDARKLY CLIENT INITIALIZED');
 //   launchDarkly.setInstance(ldclient);
+//   moduleLoader.cache.initializeExports();
 // });
   
 // ---------------------------

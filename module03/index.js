@@ -63,7 +63,6 @@ async function targetingHelper(ctx) {
 // Do not edit below this line
 const userVariations = [user1, user2, user3].map(ctx => {
   if (launchDarkly.hasClientInitialized()) return targetingHelper(ctx);
-})
+});
 
-module.exports = launchDarkly.hasClientInitialized() ?
-{ users: [user1, user2, user3], userVariations } : { users: [], userVariations: [] };
+module.exports = { users: [user1, user2, user3], userVariations };

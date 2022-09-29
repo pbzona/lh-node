@@ -9,9 +9,7 @@
 class ExportCache {
   constructor(modules) {
     this.modules = modules;
-    this.moduleExports = modules.map(mod => {
-      return require(mod);
-    });
+    this.moduleExports = Array(modules.length).fill(null);
   }
   
   // The `index` argument is the module's actual number, not index 
@@ -19,6 +17,15 @@ class ExportCache {
   update(index) {
     let idx = index - 1; // Subctracting 1 so the index argument matches with the module's name
     this.moduleExports[idx] = require(this.modules[idx]);
+  }
+
+  // Initialize the array of exports - this should only be called when the LD client is ready
+  // Other modules refer to the LD singleton, so this prevents those modules from being loaded
+  // until the singleton has a valid client
+  initializeExports() {
+    this.moduleExports = this.modules.map(mod => {
+      return require(mod);
+    });
   }
 }
 
