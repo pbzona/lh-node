@@ -1,4 +1,5 @@
-const { ldclient } = require('../src/launchdarkly');
+const launchDarkly = require('../src/launchdarkly');
+const { ldclient } = launchDarkly;
 // Do not edit above this line
 // ---------------------------
 
@@ -49,7 +50,7 @@ const user3 = {
 // Step 2:
 // Add your feature flag to the variation call in the helper
 async function targetingHelper(ctx) {
-  const flagValue = false;
+  flagValue = await ldclient.variation('flagKey', ctx, false);
   return flagValue;
 }
 
@@ -60,9 +61,9 @@ async function targetingHelper(ctx) {
 
 // ---------------------------
 // Do not edit below this line
-const userVariations = [user1, user2, user3].map(targetingHelper);
+const userVariations = [user1, user2, user3].map(ctx => {
+  if (launchDarkly.hasClientInitialized()) return targetingHelper(ctx);
+})
 
-module.exports = {
-  users: [user1, user2, user3],
-  userVariations
-};
+module.exports = launchDarkly.hasClientInitialized() ?
+{ users: [user1, user2, user3], userVariations } : { users: [], userVariations: [] };

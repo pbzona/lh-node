@@ -1,18 +1,18 @@
-const { ldclient } = require('../src/launchdarkly');
+const launchDarkly = require('../src/launchdarkly');
 const { AppConfiguration, LegacyAppConfiguration} = require('../lib/appConfig');
 const pathToDependencies = require('path').join(__dirname, 'dependencies.js');
 
 async function configureApp() {
-  
+  const { ldclient } = launchDarkly;
   const fallback = false;
   let useNewConfig = fallback;
   // ---------------------------
   // Do not edit above this line
   
   const userCtx = {
-    key: 'abc123',
-    name: 'Gob Bluth', // Replace this value with your name
-    email: 'crissangelfan99@gmail.com', // Replace this value with your email address
+    key: 'abc123', // Replace this value with a unique key to test
+    name: 'Gob Bluth', // Replace this value with your name to test
+    email: 'crissangelfan99@gmail.com', // Replace this value with your email address to test
     custom: {
       state: 'CA',
       early_access: false,
@@ -22,11 +22,9 @@ async function configureApp() {
       app_version: '2.0'
     }
   };
-  
-  if (ldclient) {
-    // Paste your call to variation here and assign it to `useNewConfig`:
-    
-  }
+
+  // Update the flag key to match the one you created
+  useNewConfig = await ldclient.variation('flagKey', userCtx, fallback);
 
   // This code loads and validates the configuration file. I hope it works!!!
   let config;
@@ -50,4 +48,5 @@ async function configureApp() {
   };
 }
 
-module.exports = configureApp();
+module.exports = launchDarkly.hasClientInitialized() ?
+  configureApp() : { flagValue: false, featureIsWorking: false };
