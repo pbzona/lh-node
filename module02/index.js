@@ -11,7 +11,7 @@ async function configureApp() {
   // ---------------------------
   // Do not edit above this line
   // Replace the flagKey value with your feature flag key below:
-  useNewConfig = await ldclient.variation('first-flag', userCtx, fallback);
+  useNewConfig = await ldclient.variation('flagKey', userCtx, fallback);
 
   // This code loads and validates the configuration file. I hope it works!!!
   let config;
