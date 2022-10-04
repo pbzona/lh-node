@@ -13,7 +13,7 @@ if (!launchDarkly.hasClientInitialized()) {
 // const ld = require('');
 
 // STEP 2: Define your SDK key
-// const SDK_KEY = "";
+// const SDK_KEY = '';
 
 // STEP 3: Intialize the SDK client
 // const ldclient = ld.init(SDK_KEY);
