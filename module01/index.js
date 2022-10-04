@@ -20,13 +20,12 @@ if (!launchDarkly.hasClientInitialized()) {
 
 // STEP 4: Print a test message to indicate the client has initialized successfully
 //         and perform some setup operations to allow its use elsewhere
-
 // ldclient.on('ready', () => {
 //   console.log('LAUNCHDARKLY CLIENT INITIALIZED');
 //   launchDarkly.setInstance(ldclient);
 //   moduleLoader.cache.initializeExports();
 // });
-  
+
 // ---------------------------
 // Do not edit below this line
 }

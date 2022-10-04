@@ -32,10 +32,11 @@ async function configureApp() {
 
   if (useNewConfig) {
     config = new AppConfiguration(options);
+    config.loadFromFile('/var/opt/myApp/config.json');
   } else {
     config = new LegacyAppConfiguration(options);
+    config.loadFromFile('/etc/myApp/config.json');
   }
-  config.loadFromFile('/var/opt/myApp/config.json');
   config.loadDependencies(pathToDependencies);
   // ---------------------------
   // Do not edit below this line
