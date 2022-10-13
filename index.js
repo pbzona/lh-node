@@ -1,4 +1,6 @@
 const app = require('./src/app');
 const { listenHandler } = require('./src/handlers');
 
-app.listen(process.env.PORT || 3001, '0.0.0.0', listenHandler);
+const PORT = 3001;
+
+app.listen(PORT, '0.0.0.0', listenHandler);

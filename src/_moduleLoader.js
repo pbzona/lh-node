@@ -6,10 +6,10 @@ const fs = require('fs');
 const ExportCache = require('./exportCache');
 
 const modules = [
+  require('path').resolve(__dirname, '../module00'),
   require('path').resolve(__dirname, '../module01'),
   require('path').resolve(__dirname, '../module02'),
   require('path').resolve(__dirname, '../module03'),
-  require('path').resolve(__dirname, '../module04'),
 ];
 
 // Manages loading and reloading of learning module code
@@ -25,10 +25,7 @@ class Loader {
   }
 
   // Forces a reload of a module, specified by its number
-  // The `index` argument is the module's actual number, not index 
-  // in an array (for readability elsewhere in the code)
-  load(index) {
-    let idx = index - 1; // Subctracting 1 so the index argument matches with the module's name
+  load(idx) {
     try {
       delete require.cache[require.resolve(this.modules[idx])]
       this.cache.update(index);
@@ -45,5 +42,4 @@ class Loader {
   }
 }
 
-let moduleLoader = new Loader(modules);
-module.exports = moduleLoader;
+module.exports = new Loader(modules);

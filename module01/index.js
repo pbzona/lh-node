@@ -1,32 +1,40 @@
+// Example of how to import once the singleton's ldclient has been set
 const launchDarkly = require('../src/launchdarkly');
-const moduleLoader = require('../src/_moduleLoader');
+const { AppConfiguration, LegacyAppConfiguration} = require('../lib/appConfig');
+const pathToDependencies = require('path').join(__dirname, 'dependencies.js');
 
-// This checks to see if the client has already been initialized
-// If we remove this check, it will initiate a new streaming connection every time
-// its endpoint is requested
-if (!launchDarkly.hasClientInitialized()) {
-// Do not edit above this line
-// ---------------------------
+async function configureApp() {
+  const { ldclient } = launchDarkly;
+  const userCtx = { key: 'abc' };
+  const fallback = false;
+  let useNewConfig = fallback;
+  // ---------------------------
+  // Do not edit above this line
+  // Replace the flagKey value with your feature flag key below:
+  useNewConfig = await ldclient.variation('flagKey', userCtx, fallback);
 
-// SDK Setup
-// STEP 1: Import the correct module
-// const ld = require('');
+  // This code loads and validates the configuration file. I hope it works!!!
+  let config;
+  const options = { debug: false };
 
-// STEP 2: Define your SDK key
-// const SDK_KEY = '';
+  if (useNewConfig) {
+    config = new AppConfiguration(options);
+    config.loadFromFile('/varr/opt/myApp/config.json');
+  } else {
+    config = new LegacyAppConfiguration(options);
+    config.loadFromFile('/etc/myApp/config.json');
+  }
+  config.loadDependencies(pathToDependencies);
+  // ---------------------------
+  // Do not edit below this line
+  configValid = config.validate();
+  dependenciesSatisfied = config.checkDependencies();
 
-// STEP 3: Intialize the SDK client
-// const ldclient = ld.init(SDK_KEY);
-
-// STEP 4: Print a test message to indicate the client has initialized successfully
-//         and perform some setup operations to allow its use elsewhere
-// ldclient.on('ready', () => {
-//   console.log('LAUNCHDARKLY CLIENT INITIALIZED');
-//   launchDarkly.setInstance(ldclient);
-//   moduleLoader.cache.initializeExports();
-// });
-
-// ---------------------------
-// Do not edit below this line
+  return {
+    flagValue: useNewConfig,
+    featureIsWorking: configValid && dependenciesSatisfied
+  };
 }
-module.exports = { ldclient: launchDarkly.ldclient };
+
+module.exports = launchDarkly.hasClientInitialized() ?
+  configureApp() : { flagValue: false, featureIsWorking: false };

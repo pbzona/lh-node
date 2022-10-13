@@ -1,68 +1,53 @@
 const launchDarkly = require('../src/launchdarkly');
-const { ldclient } = launchDarkly;
-// Do not edit above this line
-// ---------------------------
+const { AppConfiguration, LegacyAppConfiguration} = require('../lib/appConfig');
+const pathToDependencies = require('path').join(__dirname, 'dependencies.js');
 
-// Step 1:
-// Review the three example users below
-const user1 = {
-  key: 'user1',
-  email: 'jsmith@company.org',
-  name: 'John Smith',
-  custom: {
-    state: 'FL',
-    early_access: false,
-    device: 'mobile',
-    operating_system: 'android',
-    browser_name: 'firefox',
-    app_version: '1.9'
+async function configureApp() {
+  const { ldclient } = launchDarkly;
+  const fallback = false;
+  let useNewConfig = fallback;
+  // ---------------------------
+  // Do not edit above this line
+  
+  const userCtx = {
+    key: 'abc123', // Replace this value with a unique key to test
+    name: 'Gob Bluth', // Replace this value with your name to test
+    email: 'crissangelfan99@gmail.com', // Replace this value with your email address to test
+    custom: {
+      state: 'CA',
+      early_access: false,
+      device: 'mobile',
+      operating_system: 'android',
+      browser_name: 'opera',
+      app_version: '2.0'
+    }
+  };
+
+  // Update the flag key to match the one you created
+  useNewConfig = await ldclient.variation('flagKey', userCtx, fallback);
+
+  // This code loads and validates the configuration file. I hope it works!!!
+  let config;
+  const options = { debug: false };
+
+  if (useNewConfig) {
+    config = new AppConfiguration(options);
+    config.loadFromFile('/var/opt/myApp/config.json');
+  } else {
+    config = new LegacyAppConfiguration(options);
+    config.loadFromFile('/etc/myApp/config.json');
   }
+  config.loadDependencies(pathToDependencies);
+  // ---------------------------
+  // Do not edit below this line
+  configValid = config.validate();
+  dependenciesSatisfied = config.checkDependencies();
+
+  return {
+    flagValue: useNewConfig,
+    featureIsWorking: configValid && dependenciesSatisfied
+  };
 }
 
-const user2 = {
-  key: 'user2',
-  email: 'alice@gmail.com',
-  name: 'Alice Jackson',
-  custom: {
-    state: 'PA',
-    early_access: true,
-    device: 'mobile',
-    operating_system: 'iOS',
-    browser_name: 'safari',
-    app_version: '2.0'
-  }
-}
-
-const user3 = {
-  key: 'user3',
-  email: 'diego333@protonmail.com',
-  name: 'Diego Rodriguez',
-  custom: {
-    state: 'CA',
-    early_access: false,
-    device: 'mobile',
-    operating_system: 'android',
-    browser_name: 'chrome',
-    app_version: '2.1'
-  }
-}
-
-// Step 2:
-// Add your feature flag to the variation call in the helper
-async function targetingHelper(ctx) {
-  flagValue = await ldclient.variation('flagKey', ctx, false);
-  return flagValue;
-}
-
-// Step 3:
-// In the LaunchDarkly UI, create a targeting rule that 
-// returns true only for users who work at Company
-// and signed up with their work email
-
-// ---------------------------
-// Do not edit below this line
-const userVariations = [user1, user2, user3].map(ctx => {
-  if (launchDarkly.hasClientInitialized()) return targetingHelper(ctx);
-});
-
-module.exports = { users: [user1, user2, user3], userVariations };
+module.exports = launchDarkly.hasClientInitialized() ?
+  configureApp() : { flagValue: false, featureIsWorking: false };

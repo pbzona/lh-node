@@ -7,13 +7,13 @@ const transformModuleExports = (moduleID, exportedValue) => {
   // Each test should take `exportedValue` as an argument; this will be the
   // object exported by that learning module
   switch (moduleID) {
-    case 1:
+    case 0:
       return moduleTransforms.sdkSetup(exportedValue);
-    case 2:
+    case 1:
       return moduleTransforms.configureApp(exportedValue);
-    case 3:
+    case 2:
       return moduleTransforms.getUserVariations(exportedValue);
-    case 4:
+    case 3:
       return moduleTransforms.configureApp(exportedValue);
     default:
       return `Invalid request - no module with index ${moduleID}`;

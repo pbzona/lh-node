@@ -2,7 +2,7 @@ const launchDarkly = require('../src/launchdarkly');
 
 // Write transformations against the learning module exports here
 
-// Module01
+// Module00
 const sdkSetupResult = (is_initialized) => {
   return {
     is_initialized
@@ -27,13 +27,13 @@ exports.sdkSetup = (exportedValue) => {
   return sdkSetupResult(false);
 }
 
-// Module02
+// Module01 && Module03
 exports.configureApp = async (exportedValue) => {
   const { flagValue, featureIsWorking } = await exportedValue;
   return { flagValue, featureIsWorking };
 }
 
-// Module03
+// Module02
 exports.getUserVariations = async (exportedValue) => {
   const { users } = exportedValue;
   const userVariations = await Promise.all(exportedValue.userVariations);
