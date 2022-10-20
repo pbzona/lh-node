@@ -14,8 +14,7 @@ class ExportCache {
   
   // The `index` argument is the module's actual number, not index 
   // in an array (for readability elsewhere in the code)
-  update(index) {
-    let idx = index - 1; // Subctracting 1 so the index argument matches with the module's name
+  update(idx) {
     this.moduleExports[idx] = require(this.modules[idx]);
   }
 

@@ -28,10 +28,10 @@ class Loader {
   load(idx) {
     try {
       delete require.cache[require.resolve(this.modules[idx])]
-      this.cache.update(index);
+      this.cache.update(idx);
       return require(this.modules[idx]);
     } catch (err) {
-      console.error(`ERROR: Unable to load export from module ${index} - falling back to last known good value. There is likely a syntax error in the file ${this.modules[idx]}`);
+      console.error(`ERROR: Unable to load export from module ${idx} - falling back to last known good value. There is likely a syntax error in the file ${this.modules[idx]}`);
     }
     return this.cache.moduleExports[idx];
   }
