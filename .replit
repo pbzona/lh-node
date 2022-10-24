@@ -1,2 +1,3 @@
-run = ["node", "index.js"]
+run = ["npm", "start"]
 
+hidden = ["src", "node_modules", "index.js", "package-lock.json", "package.json"]
