@@ -1,6 +1,7 @@
 const moduleLoader = require('./_moduleLoader');
 const moduleMap = require('./_moduleMap');
 const progressTracker = require('./progressTracker');
+const FlagKeyCache = require('./flagKeyCache');
 
 exports.contentHandler = (req, res) => {
   res.send({ message: 'This is content' });
@@ -32,4 +33,16 @@ exports.singleModuleProgressHandler = (req,res) => {
 
 exports.listenHandler = () => {
   console.log('Listening for connections...');
+}
+
+exports.flagKeyHandler = {
+  set: (req, res) => {
+    const { flagKey } = req.body;
+    FlagKeyCache.flagKey = flagKey;
+    res.send({ message: "Successfully updated flag key on server" });
+  },
+  get: (req, res) => {
+    const { flagKey } = FlagKeyCache;
+    res.send({ flagKey });
+  }
 }

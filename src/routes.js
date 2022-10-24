@@ -8,5 +8,7 @@ router.get('/module/:id', handlers.moduleHandler);
 router.get('/module/:id/:noop', handlers.moduleHandler);
 router.get('/progress', handlers.progressHandler);
 router.get('/progress/:id', handlers.singleModuleProgressHandler);
+router.get('/flag', handlers.flagKeyHandler.get);
+router.post('/flag', handlers.flagKeyHandler.set);
 
 module.exports = router;

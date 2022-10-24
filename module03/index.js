@@ -1,6 +1,7 @@
 const launchDarkly = require('../src/launchdarkly');
 const { AppConfiguration, LegacyAppConfiguration} = require('../lib/appConfig');
 const pathToDependencies = require('path').join(__dirname, 'dependencies.js');
+const { flagKey } = require('../src/flagKeyCache');
 
 async function configureApp() {
   const { ldclient } = launchDarkly;
@@ -23,8 +24,7 @@ async function configureApp() {
     }
   };
 
-  // Update the flag key to match the one you created
-  useNewConfig = await ldclient.variation('flagKey', userCtx, fallback);
+  useNewConfig = await ldclient.variation(flagKey, userCtx, fallback);
 
   // This code loads and validates the configuration file. I hope it works!!!
   let config;

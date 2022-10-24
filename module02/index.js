@@ -1,5 +1,6 @@
 const launchDarkly = require('../src/launchdarkly');
 const { ldclient } = launchDarkly;
+const { flagKey } = require('../src/flagKeyCache');
 // Do not edit above this line
 // ---------------------------
 
@@ -50,7 +51,7 @@ const user3 = {
 // Step 2:
 // Add your feature flag to the variation call in the helper
 async function targetingHelper(ctx) {
-  flagValue = await ldclient.variation('flagKey', ctx, false);
+  flagValue = await ldclient.variation(flagKey, ctx, false);
   return flagValue;
 }
 
