@@ -3,6 +3,7 @@ const handlers = require('./handlers');
 
 const router = express.Router();
 
+router.get('/', handlers.homepageHandler);
 router.get('/content', handlers.contentHandler);
 router.get('/module/:id', handlers.moduleHandler);
 router.get('/module/:id/:noop', handlers.moduleHandler);
