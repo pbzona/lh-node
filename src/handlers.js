@@ -2,6 +2,7 @@ const moduleLoader = require('./_moduleLoader');
 const moduleMap = require('./_moduleMap');
 const progressTracker = require('./progressTracker');
 const FlagKeyCache = require('./flagKeyCache');
+const { getServerURL } = require('./helpers');
 
 exports.homepageHandler = (req, res) => {
   const redirectAddress = `https://zippy-twilight-543aed.netlify.app/`
@@ -39,7 +40,8 @@ exports.singleModuleProgressHandler = (req,res) => {
   res.send({ response });
 }
 
-exports.listenHandler = () => {
+exports.listenHandler = (port) => {
+  console.log(`Server URL: ${getServerURL(port)}\n`);
   console.log('Listening for connections...');
 }
 
