@@ -56,3 +56,9 @@ exports.flagKeyHandler = {
     res.send({ flagKey });
   }
 }
+
+exports.statusHandler = (req, res) => {
+  // Hard coding a response for now, just need to be able to ping this
+  // as a health check on the frontend
+  res.send({ isThisTheNorthStarServer: true });
+}

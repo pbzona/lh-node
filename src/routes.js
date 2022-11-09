@@ -11,5 +11,6 @@ router.get('/progress', handlers.progressHandler);
 router.get('/progress/:id', handlers.singleModuleProgressHandler);
 router.get('/flag', handlers.flagKeyHandler.get);
 router.post('/flag', handlers.flagKeyHandler.set);
+router.get('/status', handlers.statusHandler);
 
 module.exports = router;
