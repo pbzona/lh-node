@@ -1,7 +1,7 @@
 const isRunningInReplit = () => {
   // Detects whether running this server in replit
-  return !!(process.env.REPL_OWNER && process.env.REPL_SLUG)
-}
+  return !!(process.env.REPL_OWNER && process.env.REPL_SLUG);
+};
 
 exports.getServerURL = (port) => {
   if (isRunningInReplit()) {
@@ -9,4 +9,4 @@ exports.getServerURL = (port) => {
   }
 
   return `http://localhost:${port}`;
-}
+};

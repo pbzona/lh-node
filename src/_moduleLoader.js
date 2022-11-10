@@ -27,7 +27,7 @@ class Loader {
   // Forces a reload of a module, specified by its number
   load(idx) {
     try {
-      delete require.cache[require.resolve(this.modules[idx])]
+      delete require.cache[require.resolve(this.modules[idx])];
       this.cache.update(idx);
       return require(this.modules[idx]);
     } catch (err) {

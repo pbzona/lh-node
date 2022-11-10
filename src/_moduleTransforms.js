@@ -6,8 +6,8 @@ const launchDarkly = require('../src/launchdarkly');
 const sdkSetupResult = (is_initialized) => {
   return {
     is_initialized
-  }
-}
+  };
+};
 
 exports.sdkSetup = (exportedValue) => {
   let { ldclient } = exportedValue;
@@ -25,13 +25,13 @@ exports.sdkSetup = (exportedValue) => {
   }
 
   return sdkSetupResult(false);
-}
+};
 
 // Module01 && Module03
 exports.configureApp = async (exportedValue) => {
   const { flagValue, featureIsWorking } = await exportedValue;
   return { flagValue, featureIsWorking };
-}
+};
 
 // Module02
 exports.getUserVariations = async (exportedValue) => {
@@ -43,11 +43,11 @@ exports.getUserVariations = async (exportedValue) => {
       return {
         context: user,
         variation: userVariations[idx]
-      }
-    })}
+      };
+    })};
   } catch (err) {
-    console.error(err)
+    console.error(err);
   }
 
-  return { users: null }
-}
+  return { users: null };
+};

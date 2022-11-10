@@ -18,6 +18,6 @@ const transformModuleExports = (moduleID, exportedValue) => {
     default:
       return `Invalid request - no module with index ${moduleID}`;
   }
-}
+};
 
 module.exports = { transformModuleExports };
