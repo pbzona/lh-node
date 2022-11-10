@@ -13,7 +13,6 @@ class FlagKeyCache {
 
   set flagKey(val) {
     this._flagKey = val;
-    return this.flagKey;
   }
 }
 

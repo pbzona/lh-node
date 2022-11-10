@@ -2,7 +2,6 @@
 // Usually the four defaults provided here will be enough, but you can add
 // or subtract items from this list as needed - copy and paste the line with
 // the module name changed as appropriate
-const fs = require('fs');
 const ExportCache = require('./exportCache');
 
 const modules = [

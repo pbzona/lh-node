@@ -1,5 +1,3 @@
-const launchDarkly = require('../src/launchdarkly');
-
 // Write transformations against the learning module exports here
 
 // Module00
