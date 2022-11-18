@@ -5,7 +5,7 @@ const FlagKeyCache = require('./flagKeyCache');
 const { getServerURL } = require('./helpers');
 
 exports.homepageHandler = (req, res) => {
-  const redirectAddress = 'https://zippy-twilight-543aed.netlify.app/';
+  const redirectAddress = 'https://northstar-workshop.netlify.app/';
   
   res.writeHead(301, {
     Location: redirectAddress
